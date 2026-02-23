@@ -1,3 +1,22 @@
 spring:
   application:
     name: UniversityLecture
+  datasource:
+    url: jdbc:postgresql://localhost:5433/university_lecture_db
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    user: limir
+    locations: classpath:db/migration
+    enabled: true

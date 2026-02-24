@@ -1,11 +1,10 @@
 spring:
   application:
     name: UniversityLecturer
-  datasource:
-    url: jdbc:postgresql://localhost:5433/university_lecturer_db
-    username: user
-    password: password
-    driver-class-name: org.postgresql.Driver
+
+  profiles:
+    active: local
+    default: local
 
   jpa:
     hibernate:
@@ -17,6 +16,5 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
   flyway:
-    user: limir
     locations: classpath:db/migration
     enabled: true

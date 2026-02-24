@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.limir</groupId>
-    <artifactId>UniversityLecture</artifactId>
+    <artifactId>UniversityLecturer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>UniversityLecture</name>
+    <name>UniversityLecturer</name>
     <description>UniversityLecture</description>
     <url/>
     <licenses>

@@ -1,8 +1,8 @@
 spring:
   application:
-    name: UniversityLecture
+    name: UniversityLecturer
   datasource:
-    url: jdbc:postgresql://localhost:5433/university_lecture_db
+    url: jdbc:postgresql://localhost:5433/university_lecturer_db
     username: user
     password: password
     driver-class-name: org.postgresql.Driver

@@ -1,10 +1,10 @@
-package org.limir.universitylecture;
+package org.limir.universitylecturer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UniversityLectureApplicationTests {
+class UniversityLecturerApplicationTests {
 
     @Test
     void contextLoads() {

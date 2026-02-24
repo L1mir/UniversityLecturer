@@ -1,13 +1,13 @@
-package org.limir.universitylecture;
+package org.limir.universitylecturer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UniversityLectureApplication {
+public class UniversityLecturerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UniversityLectureApplication.class, args);
+        SpringApplication.run(UniversityLecturerApplication.class, args);
     }
 
 }

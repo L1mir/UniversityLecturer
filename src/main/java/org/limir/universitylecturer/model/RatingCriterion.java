@@ -30,6 +30,13 @@ public class RatingCriterion {
     @Column(name = "created_at")
     private Instant createdAt;
 
+    @PrePersist
+    protected void onCreate() {
+        if (createdAt == null) {
+            createdAt = Instant.now();
+        }
+    }
+
     @OneToMany(mappedBy = "criteria")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

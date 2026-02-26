@@ -39,6 +39,13 @@ public class Teacher {
     @Column(name = "created_at")
     private Instant createdAt;
 
+    @PrePersist
+    protected void onCreate() {
+        if (createdAt == null) {
+            createdAt = Instant.now();
+        }
+    }
+
     @OneToMany(mappedBy = "teacher")
     private Set<TeachersRating> teachersRatings = new LinkedHashSet<>();
 }

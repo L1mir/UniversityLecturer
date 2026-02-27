@@ -24,12 +24,12 @@ public class RatingCriterionController {
         return ResponseEntity.ok(ratingCriterionService.findRatingCriterion());
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/rating-criterion/{id}")
     public ResponseEntity<RatingCriterionDto> getRatingCriterionById(@PathVariable long id) {
         return ResponseEntity.ok(ratingCriterionService.findRatingCriterionById(id));
     }
 
-    @DeleteMapping("/id/{id}")
+    @DeleteMapping("/rating-criterion/{id}")
     public ResponseEntity<Long> deleteRatingCriterionById(@PathVariable long id) {
         return ResponseEntity.ok(ratingCriterionService.deleteRatingCriterionById(id));
     }

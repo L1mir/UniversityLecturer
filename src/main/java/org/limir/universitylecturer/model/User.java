@@ -20,11 +20,6 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "role_id", nullable = false)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Role role;
-
     @Column(name = "name", unique = true, nullable = false, length = 100)
     private String name;
 
@@ -48,4 +43,9 @@ public class User {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<TeachersRating> teachersRatings = new LinkedHashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "role_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Role role;
 }

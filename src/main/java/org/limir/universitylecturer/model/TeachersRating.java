@@ -21,6 +21,11 @@ public class TeachersRating {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "rating", nullable = false)
+    @Min(value = 0, message = "Рейтинг не может быть меньше 0!")
+    @Max(value = 10, message = "Рейтинг не может быть выше 10!")
+    private Short rating;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -32,9 +37,4 @@ public class TeachersRating {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "criteria_id", nullable = false)
     private RatingCriterion criteria;
-
-    @Column(name = "rating", nullable = false)
-    @Min(value = 0, message = "Рейтинг не может быть меньше 0!")
-    @Max(value = 10, message = "Рейтинг не может быть выше 10!")
-    private Short rating;
 }

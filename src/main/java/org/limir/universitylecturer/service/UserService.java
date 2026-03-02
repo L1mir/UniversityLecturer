@@ -52,4 +52,14 @@ public class UserService {
                 .map(userMapper::userToUserResponse)
                 .orElse(null);
     }
+
+    public UserResponse authenticate(String email, String password) {
+        var user = userRepository.findByEmail(email).orElse(null);
+
+        if (user != null && checkPassword(password, user.getPassword())) {
+            return userMapper.userToUserResponse(user);
+        }
+
+        return null;
+    }
 }

@@ -1,8 +1,10 @@
 package org.limir.universitylecturer.service;
 
 import lombok.AllArgsConstructor;
+import org.limir.universitylecturer.dto.RoleDTO;
 import org.limir.universitylecturer.dto.UserRequest;
 import org.limir.universitylecturer.dto.UserResponse;
+import org.limir.universitylecturer.mappers.RoleMapper;
 import org.limir.universitylecturer.mappers.UserMapper;
 import org.limir.universitylecturer.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +21,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
+    private final RoleMapper roleMapper;
 
     public boolean checkPassword(String rawPassword, String encodedPassword){
         return passwordEncoder.matches(rawPassword, encodedPassword);
@@ -51,6 +54,23 @@ public class UserService {
                 .findByName(name)
                 .map(userMapper::userToUserResponse)
                 .orElse(null);
+    }
+
+    public UserResponse findUserByEmail(String email) {
+        return userRepository
+                .findByEmail(email)
+                .map(userMapper::userToUserResponse)
+                .orElse(null);
+    }
+
+    public String deleteUserByName(String name) {
+        userRepository.deleteUserByName(name).orElse(null);
+        return name;
+    }
+
+    public void changeUserRole(String name, RoleDTO roleDTO) {
+        var user = userRepository.findByName(name).orElse(null);
+        user.setRole(roleMapper.roleDTOToRole(roleDTO));
     }
 
     public UserResponse authenticate(String email, String password) {

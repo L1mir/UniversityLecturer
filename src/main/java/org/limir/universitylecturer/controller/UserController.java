@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserResponse>> getAllUser(){
+    public ResponseEntity<List<UserResponse>> findAllUser(){
         return ResponseEntity.ok(userService.findAllUsers());
     }
 

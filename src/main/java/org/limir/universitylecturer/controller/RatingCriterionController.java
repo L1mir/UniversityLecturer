@@ -20,12 +20,12 @@ public class RatingCriterionController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RatingCriterionDto>> getAllRatingCriterion() {
+    public ResponseEntity<List<RatingCriterionDto>> findAllRatingCriterion() {
         return ResponseEntity.ok(ratingCriterionService.findRatingCriterion());
     }
 
     @GetMapping("/rating-criterion/{id}")
-    public ResponseEntity<RatingCriterionDto> getRatingCriterionById(@PathVariable long id) {
+    public ResponseEntity<RatingCriterionDto> findRatingCriterionById(@PathVariable long id) {
         return ResponseEntity.ok(ratingCriterionService.findRatingCriterionById(id));
     }
 

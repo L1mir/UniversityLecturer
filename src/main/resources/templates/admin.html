@@ -11,8 +11,14 @@
         Администратор
     </div>
     <div class="window-body">
-        <button class="button">Пользователи</button>
-        <button class="button">Преподаватели университета</button>
+        <a th:href="@{admin/users-panel}" class="button">
+            Пользователи
+        </a>
+
+        <a th:href="@{admin/teachers-panel}" class="button">
+            Преподаватели университета
+        </a>
+
         <button class="button">Оценка деятельности преподавателя</button>
         <button class="button">Рейтинг преподавателей университета</button>
     </div>

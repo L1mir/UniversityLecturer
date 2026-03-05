@@ -3,6 +3,7 @@ package org.limir.universitylecturer.service;
 import lombok.AllArgsConstructor;
 import org.limir.universitylecturer.dto.TeacherDTO;
 import org.limir.universitylecturer.mappers.TeacherMapper;
+import org.limir.universitylecturer.model.Teacher;
 import org.limir.universitylecturer.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,26 @@ public class TeacherService {
                 .stream()
                 .map(teacherMapper::teacherToTeacherDTO)
                 .collect(Collectors.toList());
+    }
+
+    public TeacherDTO updateTeacher(TeacherDTO teacherDTO, Long teacherId) {
+        Teacher teacherToUpdate = teacherRepository.findById(teacherId).orElse(null);
+
+        teacherToUpdate.setFirstName(teacherDTO.getFirstName());
+        teacherToUpdate.setLastName(teacherDTO.getLastName());
+        teacherToUpdate.setPatronymic(teacherDTO.getPatronymic());
+        teacherToUpdate.setDepartment(teacherDTO.getDepartment());
+
+        Teacher updatedTeacher = teacherRepository.save(teacherToUpdate);
+
+        return teacherMapper.teacherToTeacherDTO(updatedTeacher);
+    }
+
+    public TeacherDTO findTeacherByFullName(String firstName, String lastName, String patronymic) {
+        return teacherRepository.
+                findTeacherByFirstNameAndLastNameAndPatronymic(firstName, lastName, patronymic)
+                .map(teacherMapper::teacherToTeacherDTO)
+                .orElse(null);
     }
 
     public TeacherDTO findTeacherById(Long id) {

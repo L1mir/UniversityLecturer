@@ -1,0 +1,31 @@
+package org.limir.universitylecturer.controller.pages;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.limir.universitylecturer.dto.UserResponse;
+import org.limir.universitylecturer.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/admin/users")
+@AllArgsConstructor
+@NoArgsConstructor
+public class AdminUserController {
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/list")
+    public String showFindUsersPanel(Model model){
+        List<UserResponse> users = userService.findAllUsers();
+        model.addAttribute("users", users);
+        return "find_users_panel";
+    }
+
+}

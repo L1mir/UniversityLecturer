@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск пользователя</title>
+    <link rel="stylesheet" href="/static/search-style.css">
+<body>
+<div class="search-container">
+    <h2>Найти пользователя по email</h2>
+
+    <form class="search-form" th:action="@{/admin/users/search}" method="get">
+        <div class="input-group">
+            <label for="email">Введите email пользователя</label>
+            <input type="email"
+                   id="email"
+                   name="email"
+                   placeholder="example@mail.com"
+                   required>
+            <button type="submit">Найти пользователя</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

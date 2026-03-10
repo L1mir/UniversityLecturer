@@ -28,25 +28,25 @@
         }
 
         th:first-child, td:first-child {
-            width: 3%;
+            width: 2%;
             text-align: center;
             background-color: #ffffff;
         }
 
         th:nth-child(2), td:nth-child(2) {
-            width: 15%;
+            width: 20%;
         }
 
         th:nth-child(3), td:nth-child(3) {
-            width: 15%;
+            width: 20%;
         }
 
         th:nth-child(4), td:nth-child(4) {
-            width: 13%;
+            width: 5%;
         }
 
         th:nth-child(5), td:nth-child(5) {
-            width: 10%;
+            width: 5%;
             text-align: center;
         }
 
@@ -72,16 +72,28 @@
             background-color: #D3D3D3;
         }
 
-        .role-form {
-            display: inline-block;
-            margin-left: 10px;
+        .role-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .role-select {
-            padding: 4px;
-            margin-right: 5px;
-            border: 1px solid #e3e3e0;
+        .role-badge {
+            padding: 4px 8px;
             border-radius: 4px;
+            font-weight: 500;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .role-admin {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .role-user {
+            background-color: #f3e5f5;
+            color: #7b1fa2;
         }
 
         .btn {
@@ -127,18 +139,27 @@
         <td th:text="${user.name}">test11</td>
         <td th:text="${user.email}">test11@mail.com</td>
         <td>
-            <span th:text="${user.getRole().name}">admin</span>
-            <form class="role-form" th:action="@{/users/{id}/role(id=${user.id})}" method="post">
-                <select name="role" class="role-select">
-                    <option value="admin" th:selected="${user.role == 'admin'}">admin</option>
-                    <option value="user" th:selected="${user.role == 'user'}">user</option>
-                </select>
-                <button type="submit" class="btn btn-edit">изменить</button>
-            </form>
+            <div class="role-container">
+                <span class="role-badge"
+                      th:classappend="${user.role.name == 'ADMIN'} ? 'role-admin' : 'role-user'"
+                      th:text="${user.role.name}">admin</span>
+
+                <form th:action="@{/admin/users/{name}/change-role(name=${user.name})}"
+                      method="post"
+                      th:method="patch">
+
+                    <input type="hidden" name="name"
+                           th:value="${user.role.name == 'ADMIN'} ? 'USER' : 'ADMIN'" />
+                    <button type="submit" class="btn btn-edit">изменить</button>
+                </form>
+            </div>
         </td>
         <td>
-            <form th:action="@{/users/{id}/delete(id=${user.id})}" method="post"
+            <form th:action="@{/admin/users/{id}/delete(id=${user.id})}" method="post"
                   onsubmit="return confirm('Вы уверены, что хотите удалить этого пользователя?');">
+
+                <input type="hidden" name="_method" value="DELETE" />
+
                 <button type="submit" class="btn btn-delete">удалить</button>
             </form>
         </td>

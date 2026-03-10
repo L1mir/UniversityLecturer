@@ -1,12 +1,14 @@
 package org.limir.universitylecturer.service;
 
 import lombok.AllArgsConstructor;
-import org.limir.universitylecturer.dto.RoleDTO;
 import org.limir.universitylecturer.dto.UserRequest;
 import org.limir.universitylecturer.dto.UserResponse;
 import org.limir.universitylecturer.mappers.RoleMapper;
 import org.limir.universitylecturer.mappers.UserMapper;
+import org.limir.universitylecturer.model.Role;
+import org.limir.universitylecturer.repository.RoleRepository;
 import org.limir.universitylecturer.repository.UserRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
     private final RoleMapper roleMapper;
+    private final RoleRepository roleRepository;
 
     public boolean checkPassword(String rawPassword, String encodedPassword){
         return passwordEncoder.matches(rawPassword, encodedPassword);
@@ -37,7 +40,7 @@ public class UserService {
 
     public List<UserResponse> findAllUsers() {
         return userRepository
-                .findAll()
+                .findAll(Sort.by(Sort.Direction.DESC, "name"))
                 .stream()
                 .map(userMapper::userToUserResponse)
                 .collect(Collectors.toList());
@@ -63,14 +66,28 @@ public class UserService {
                 .orElse(null);
     }
 
+    public Long deleteUserById(Long id) {
+        userRepository.deleteById(id);
+        return id;
+    }
+
     public String deleteUserByName(String name) {
         userRepository.deleteUserByName(name).orElse(null);
         return name;
     }
 
-    public void changeUserRole(String name, RoleDTO roleDTO) {
-        var user = userRepository.findByName(name).orElse(null);
-        user.setRole(roleMapper.roleDTOToRole(roleDTO));
+    public void changeUserRole(String name) {
+        var user = userRepository.findByName(name)
+                .orElseThrow(() -> new RuntimeException("Пользователь не найден: " + name));
+
+        String newRoleName = user.getRole().getName().equals("ADMIN") ? "USER" : "ADMIN";
+
+        Role newRole = roleRepository.findByName(newRoleName)
+                .orElseThrow(() -> new RuntimeException("Роль не найдена: " + newRoleName));
+
+        user.setRole(newRole);
+
+        userRepository.save(user);
     }
 
     public UserResponse authenticate(String email, String password) {

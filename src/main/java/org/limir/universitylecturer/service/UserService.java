@@ -76,6 +76,14 @@ public class UserService {
         return name;
     }
 
+    public List<UserResponse> findUsersByNameEmailRole (String name, String email, Long roleId) {
+        return userRepository.
+                findUsersByNameEmailRole(name, email, roleId)
+                .stream()
+                .map(userMapper::userToUserResponse)
+                .collect(Collectors.toList());
+    }
+
     public void changeUserRole(String name) {
         var user = userRepository.findByName(name)
                 .orElseThrow(() -> new RuntimeException("Пользователь не найден: " + name));

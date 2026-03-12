@@ -14,9 +14,15 @@
         Панель для работы с пользователями
     </div>
     <div class="window-body">
-        <button class="button">Удалить пользователя</button>
-        <button class="button">Поменять роль пользователя</button>
-        <button class="button">Найти пользователя по email</button>
+        <a th:href="@{/admin/users/delete_user_panel}" class="button">
+            Удалить пользователя
+        </a>
+        <a th:href="@{/admin/users/change_user_role_panel}" class="button">
+            Поменять роль пользователя
+        </a>
+        <a th:href="@{/admin/users/find_user_by_email_panel}" class="button">
+            Найти пользователя по email
+        </a>
         <a th:href="@{/admin/users/list}" class="button">
             Вывести всех пользователей
         </a>

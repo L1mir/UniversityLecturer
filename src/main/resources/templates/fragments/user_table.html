@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Table Fragment</title>
+    <link rel="stylesheet" th:href="@{/table-style.css}">
+    <link rel="stylesheet" href="/static/table-style.css">
+</head>
+<body>
+<div th:fragment="userTable(users, showRoleChange, showDelete)">
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Логин</th>
+            <th>Email</th>
+            <th>Роль</th>
+            <th th:if="${showDelete}">Удаление пользователя</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user, iterStat: ${users}">
+            <td th:text="${iterStat.count}">1</td>
+            <td th:text="${user.name}">test11</td>
+            <td th:text="${user.email}">test11@mail.com</td>
+            <td>
+                <div class="role-container">
+                    <span class="role-badge"
+                          th:classappend="${user.role.name == 'ADMIN'} ? 'role-admin' : 'role-user'"
+                          th:text="${user.role.name}">admin</span>
+
+                    <form th:if="${showRoleChange}"
+                          th:action="@{/admin/users/{name}/change-role(name=${user.name})}"
+                          method="post"
+                          th:method="patch">
+                        <input type="hidden" name="name"
+                               th:value="${user.role.name == 'ADMIN'} ? 'USER' : 'ADMIN'" />
+                        <button type="submit" class="btn btn-edit">изменить</button>
+                    </form>
+                </div>
+            </td>
+            <td th:if="${showDelete}">
+                <form th:action="@{/admin/users/{id}/delete(id=${user.id})}" method="post"
+                      onsubmit="return confirm('Вы уверены, что хотите удалить этого пользователя?');">
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <button type="submit" class="btn btn-delete">удалить</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

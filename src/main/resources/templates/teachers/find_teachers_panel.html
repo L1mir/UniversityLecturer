@@ -2,14 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Управление пользователями</title>
+    <title>Все преподаватели</title>
+</head>
+<body>
+<div class="container">
+    <h1>Преподаватели</h1>
     <style>
-        body {
-            background: #FAF9FF;
-            font-family: Arial, Helvetica, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
 
         h1 {
             text-align: left;
@@ -34,7 +32,7 @@
         }
 
         th:nth-child(2), td:nth-child(2) {
-            width: 20%;
+            width: 15%;
         }
 
         th:nth-child(3), td:nth-child(3) {
@@ -42,11 +40,16 @@
         }
 
         th:nth-child(4), td:nth-child(4) {
-            width: 5%;
+            width: 20%;
         }
 
         th:nth-child(5), td:nth-child(5) {
-            width: 5%;
+            width: 35%;
+            text-align: center;
+        }
+
+        th:nth-child(6), td:nth-child(6) {
+            width: 10%;
             text-align: center;
         }
 
@@ -96,6 +99,19 @@
             color: #7b1fa2;
         }
 
+        body {
+            background: #FAF9FF;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
         .btn {
             padding: 4px 10px;
             cursor: pointer;
@@ -119,52 +135,43 @@
             color: white;
         }
     </style>
-</head>
-<body>
-<h1>Пользователи</h1>
-
-<table>
-    <thead>
-    <tr>
-        <th>#</th>
-        <th>Логин</th>
-        <th>Email</th>
-        <th>Роль</th>
-        <th>Удаление пользователя</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user, iterStat: ${users}">
-        <td th:text="${iterStat.count}">1</td>
-        <td th:text="${user.name}">test11</td>
-        <td th:text="${user.email}">test11@mail.com</td>
-        <td>
-            <div class="role-container">
-                <span class="role-badge"
-                      th:classappend="${user.role.name == 'ADMIN'} ? 'role-admin' : 'role-user'"
-                      th:text="${user.role.name}">admin</span>
-
-                <form th:action="@{/admin/users-panel/{name}/change-role(name=${user.name})}"
-                      method="post"
-                      th:method="patch">
-
-                    <input type="hidden" name="name"
-                           th:value="${user.role.name == 'ADMIN'} ? 'USER' : 'ADMIN'" />
+    <table>
+        <tbody>
+        <tr th:each="teacher, iterStat : ${teachers}">
+            <td th:text="${iterStat.count}">1</td>
+            <td th:text="${teacher.firstName}">Иван</td>
+            <td th:text="${teacher.lastName}">Иванов</td>
+            <td th:text="${teacher.patronymic}">Иванович</td>
+            <td th:text="${teacher.department}">Кафедра</td>
+            <td>
+                <form th:action="@{/teachers/{id}/edit(id=${teacher.id})}" method="get">
                     <button type="submit" class="btn btn-edit">изменить</button>
                 </form>
-            </div>
-        </td>
-        <td>
-            <form th:action="@{/admin/users-panel/{id}/delete(id=${user.id})}" method="post"
-                  onsubmit="return confirm('Вы уверены, что хотите удалить этого пользователя?');">
 
-                <input type="hidden" name="_method" value="DELETE" />
+                <form th:action="@{/teachers/{id}/delete(id=${teacher.id})}" method="post"
+                      onsubmit="return confirm('Удалить преподавателя?');">
 
-                <button type="submit" class="btn btn-delete">удалить</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                    <input type="hidden" name="_method" value="DELETE"/>
+
+                    <button type="submit" class="btn btn-delete">удалить</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Иван</td>
+            <td>Иванов</td>
+            <td>Иванович</td>
+            <td>Кафедра информатики</td>
+            <td>
+                <button class="btn btn-edit">изменить</button>
+                <button class="btn btn-delete">удалить</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

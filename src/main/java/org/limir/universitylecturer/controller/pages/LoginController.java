@@ -1,4 +1,4 @@
-package org.limir.universitylecturer.controller;
+package org.limir.universitylecturer.controller.pages;
 
 import lombok.AllArgsConstructor;
 import org.limir.universitylecturer.dto.UserResponse;

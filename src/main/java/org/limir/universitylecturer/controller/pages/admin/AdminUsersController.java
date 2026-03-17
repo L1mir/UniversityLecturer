@@ -1,4 +1,4 @@
-package org.limir.universitylecturer.controller.pages;
+package org.limir.universitylecturer.controller.pages.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/users")
+@RequestMapping("/admin/users-panel")
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdminUsersController {

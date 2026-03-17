@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменить данные преподавателя</title>
+    <link rel="stylesheet" th:href="@{/search-style.css}">
+    <link rel="stylesheet" href="/static/search-style.css">
+    <link rel="stylesheet" href="/static/table-style.css">
+</head>
+<body>
+<div class="search-container">
+    <h2>Изменить данные преподавателя</h2>
+
+    <form class="search-form" th:action="@{/admin/teachers-panel/change_teacher_panel}" method="get">
+        <div class="input-group">
+            <label>Фамилия</label>
+            <input type="text" name="lastName" placeholder="Введите фамилию преподавателя">
+        </div>
+
+        <div class="input-group">
+            <label>Имя</label>
+            <input type="text" name="firstName" placeholder="Введите имя преподавателя">
+        </div>
+
+        <div class="input-group">
+            <label>Отчество</label>
+            <input type="text" name="patronymic" placeholder="Введите отчество преподавателя">
+        </div>
+
+        <button type="submit">Найти преподавателя</button>
+    </form>
+
+    <div class="search-result"
+         th:if="${teachers != null and !#lists.isEmpty(teachers)}">
+
+        <h3>Результат поиска:</h3>
+
+        <div th:replace="fragments/teacher_table :: teacherTable(${teachers})"></div>
+    </div>
+
+    <div class="no-results"
+         th:if="${searched and (teachers == null or #lists.isEmpty(teachers))}">
+        Преподаватель не найден
+    </div>
+</div>
+</body>
+</html>

@@ -14,11 +14,22 @@
         Панель для работы с преподавателями
     </div>
     <div class="window-body">
-        <button class="button">Добавить преподавателя</button>
-        <button class="button">Изменить данные преподавателя</button>
-        <button class="button">Удалить преподавателя</button>
-        <button class="button">Найти преподавателя по ФИО</button>
-        <button class="button">Вывести всех преподавателей</button>
+
+        <a th:href="@{/admin/teachers-panel/add_teacher_panel}" class="button">
+            Добавить преподавателя
+        </a>
+        <a th:href="@{/admin/teachers-panel/change_teacher_panel}" class="button">
+            Изменить данные преподавателя
+        </a>
+        <a th:href="@{/admin/teachers-panel/delete_teacher_panel}" class="button">
+            Удалить преподавателя
+        </a>
+        <a th:href="@{/admin/teachers-panel/find_teacher_by_fullname_panel}" class="button">
+            Найти преподавателя по ФИО
+        </a>
+        <a th:href="@{/admin/teachers-panel/find_teachers_panel}" class="button">
+            Вывести всех преподавателей
+        </a>
     </div>
 </div>
 </body>

@@ -1,4 +1,4 @@
-package org.limir.universitylecturer.controller.pages;
+package org.limir.universitylecturer.controller.pages.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

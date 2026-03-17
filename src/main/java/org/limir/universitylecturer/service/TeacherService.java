@@ -42,11 +42,12 @@ public class TeacherService {
         return teacherMapper.teacherToTeacherDTO(updatedTeacher);
     }
 
-    public TeacherDTO findTeacherByFullName(String firstName, String lastName, String patronymic) {
+    public List<TeacherDTO> findTeacherByFullName(String firstName, String lastName, String patronymic) {
         return teacherRepository.
-                findTeacherByFirstNameAndLastNameAndPatronymic(firstName, lastName, patronymic)
+                findTeachersFullName(firstName, lastName, patronymic)
+                .stream()
                 .map(teacherMapper::teacherToTeacherDTO)
-                .orElse(null);
+                .collect(Collectors.toList());
     }
 
     public TeacherDTO findTeacherById(Long id) {

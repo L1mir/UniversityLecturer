@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить преподавателя</title>
+    <link rel="stylesheet" th:href="@{/search-style.css}">
+    <link rel="stylesheet" href="/static/search-style.css">
+<!--    <link rel="stylesheet" href="/static/table-style.css">-->
+</head>
+<body>
+<div class="search-container">
+    <h2>Добавить преподавателя</h2>
+
+    <form th:action="@{/admin/teachers-panel/add_teacher}"
+          method="post"
+          th:object="${teacher}">
+
+        <div class="input-group">
+            <label>Фамилия</label>
+            <input type="text" th:field="*{lastName}" placeholder="фамилия">
+        </div>
+
+        <div class="input-group">
+            <label>Имя</label>
+            <input type="text" th:field="*{firstName}" placeholder="имя">
+        </div>
+
+        <div class="input-group">
+            <label>Отчество</label>
+            <input type="text" th:field="*{patronymic}" placeholder="отчество">
+        </div>
+
+        <div class="input-group">
+            <label>Кафедра</label>
+            <input type="text" th:field="*{department}" placeholder="кафедра">
+        </div>
+
+        <button type="submit">Добавить преподавателя</button>
+    </form>
+</div>
+</body>
+</html>

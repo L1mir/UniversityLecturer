@@ -26,12 +26,12 @@ public class UserController {
         return ResponseEntity.ok(userService.findAllUsers());
     }
 
-    @GetMapping("user/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<UserResponse> findUserById(@PathVariable Long id){
         return ResponseEntity.ok(userService.findUserById(id));
     }
 
-    @GetMapping("user/{name}")
+    @GetMapping("by-name/{name}")
     public ResponseEntity<UserResponse> findUserByName(@PathVariable String name){
         return ResponseEntity.ok(userService.findUserByName(name));
     }

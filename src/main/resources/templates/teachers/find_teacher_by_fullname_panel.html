@@ -37,7 +37,7 @@
 
         <h3>Результат поиска:</h3>
 
-        <div th:replace="fragments/teacher_table :: teacherTable(${teachers})"></div>
+        <div th:replace="fragments/teacher_table :: teacherTable(${teachers}, 'both')"></div>
     </div>
 
     <div class="no-results"

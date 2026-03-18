@@ -1,4 +1,4 @@
-<th:block th:fragment="teacherTable(teachers)">
+<th:block th:fragment="teacherTable(teachers, actionType)">
     <table>
         <thead>
         <tr>
@@ -7,6 +7,7 @@
             <th>Фамилия</th>
             <th>Отчество</th>
             <th>Кафедра</th>
+            <th>Действия</th>
         </tr>
         </thead>
         <tbody>
@@ -16,6 +17,36 @@
             <td th:text="${teacher.lastName}"></td>
             <td th:text="${teacher.patronymic}"></td>
             <td th:text="${teacher.department}"></td>
+            <td>
+                <div th:switch="${actionType}">
+
+                    <div th:case="'both'">
+                        <form th:action="@{/admin/teachers-panel/{id}/edit(id=${teacher.id})}" method="get" style="display:inline-block;">
+                            <button type="submit" class="btn btn-edit">изменить</button>
+                        </form>
+                        <form th:action="@{/admin/teachers-panel/{id}/delete(id=${teacher.id})}" method="post"
+                              onsubmit="return confirm('Удалить преподавателя?');" style="display:inline-block;">
+                            <input type="hidden" name="_method" value="DELETE"/>
+                            <button type="submit" class="btn btn-delete">удалить</button>
+                        </form>
+                    </div>
+
+                    <div th:case="'delete'">
+                        <form th:action="@{/admin/teachers-panel/{id}/delete(id=${teacher.id})}" method="post"
+                              onsubmit="return confirm('Удалить преподавателя?');" style="display:inline-block;">
+                            <input type="hidden" name="_method" value="DELETE"/>
+                            <button type="submit" class="btn btn-delete">удалить</button>
+                        </form>
+                    </div>
+
+                    <div th:case="'edit'">
+                        <form th:action="@{/admin/teachers-panel/{id}/edit(id=${teacher.id})}" method="get" style="display:inline-block;">
+                            <button type="submit" class="btn btn-edit">изменить</button>
+                        </form>
+                    </div>
+
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>

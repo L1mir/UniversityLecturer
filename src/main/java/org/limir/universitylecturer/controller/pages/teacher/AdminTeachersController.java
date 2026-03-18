@@ -57,6 +57,33 @@ public class AdminTeachersController {
         return "teachers/delete_teacher_panel";
     }
 
+    @GetMapping("/{id}/edit")
+    public String editTeacher(@PathVariable Long id, Model model) {
+
+        TeacherDTO teacher = teacherService.findTeacherById(id);
+        model.addAttribute("teacher", teacher);
+
+        return "teachers/edit_teacher_panel";
+    }
+
+    @PostMapping("/{id}/update")
+    public String updateTeacher(@PathVariable Long id,
+                                @ModelAttribute TeacherDTO teacherDTO) {
+
+        teacherService.updateTeacher(teacherDTO, id);
+
+        return "redirect:/admin/teachers-panel/find_teachers_panel";
+    }
+
+    @DeleteMapping("/{id}/delete")
+    public String deleteTeacher(@PathVariable Long id,
+                                @RequestHeader(value = "Referer", required = false) String referer) {
+
+        teacherService.deleteTeacherById(id);
+
+        return "redirect:" + referer;
+    }
+
     private void prepareTeachersFilter(String firstName,
                                        String lastName,
                                        String patronymic,

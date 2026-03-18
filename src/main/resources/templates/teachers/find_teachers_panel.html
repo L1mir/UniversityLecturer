@@ -144,11 +144,11 @@
             <td th:text="${teacher.patronymic}">Иванович</td>
             <td th:text="${teacher.department}">Кафедра</td>
             <td>
-                <form th:action="@{/teachers/{id}/edit(id=${teacher.id})}" method="get">
+                <form th:action="@{/admin/teachers-panel/{id}/edit(id=${teacher.id})}" method="get">
                     <button type="submit" class="btn btn-edit">изменить</button>
                 </form>
 
-                <form th:action="@{/teachers/{id}/delete(id=${teacher.id})}" method="post"
+                <form th:action="@{/admin/teachers-panel/{id}/delete(id=${teacher.id})}" method="post"
                       onsubmit="return confirm('Удалить преподавателя?');">
 
                     <input type="hidden" name="_method" value="DELETE"/>
@@ -157,20 +157,6 @@
                 </form>
             </td>
         </tr>
-        </tbody>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>Иван</td>
-            <td>Иванов</td>
-            <td>Иванович</td>
-            <td>Кафедра информатики</td>
-            <td>
-                <button class="btn btn-edit">изменить</button>
-                <button class="btn btn-delete">удалить</button>
-            </td>
-        </tr>
-        </tbody>
     </table>
 </div>
 </body>
